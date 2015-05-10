@@ -65,6 +65,8 @@ BOOL CMyIP::IP2Link(WPARAM wparam, LPARAM lparam)
 	///< 如果信息超过容量就进行分片处理, 
 	///< 调用链路层的发送函数如果发送失败 return FALSE;
 	///< 否则 return TRUE;
+	MyIP = new IP_Msg;
+	info = new _data;
 	int offset = 0, ident = 0;
 	ident++;
 	IP_data = (struct Msg*)wparam;
@@ -93,7 +95,7 @@ BOOL CMyIP::IP2Link(WPARAM wparam, LPARAM lparam)
 	MyIP->iphdr->ih_offset = offset;
 	MyIP->iphdr->ih_len = strlen(IP_data->data);
 	MyIP->iphdr->ih_version = 4;
-	strncpy_s(MyIP->data, strlen(IP_data->data) - offset * 8, IP_data->data, strlen(IP_data->data) - offset * 8);
+	memcpy(MyIP->data, IP_data->data, strlen(IP_data->data) - offset * 8);
 	(AfxGetApp()->m_pMainWnd)->SendMessage(LINKSEND, (WPARAM)MyIP, lparam);
 
 	return 0;
@@ -119,12 +121,12 @@ Bool CMyIP::IP2Trans(WPARAM wparam, LPARAM lparam)
 		if (MyIP->iphdr->ih_offset * 8 == _offset)
 		{
 			if (MyIP->iphdr->ih_flags){
-				strncpy_s(IP_data->data + _offset, MAXSIZE, MyIP->data, MAXSIZE);
+				memcpy(IP_data->data + _offset, MyIP->data, MAXSIZE);
 				_offset = _offset + MAXSIZE;
 				IP_data->dip = MyIP->iphdr->ih_daddr;
 			}
 			else{
-				strncpy_s(IP_data->data + _offset, MAXSIZE, MyIP->data, MyIP->iphdr->ih_len - _offset);
+				memcpy(IP_data->data + _offset, MyIP->data, MyIP->iphdr->ih_len - _offset);
 				_offset = 0;
 				IP_data->dip = MyIP->iphdr->ih_daddr;
 				(AfxGetApp()->m_pMainWnd)->SendMessage(TRANSTOAPP, (WPARAM)IP_data, lparam);
