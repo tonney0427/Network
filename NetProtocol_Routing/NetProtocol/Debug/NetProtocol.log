@@ -1,0 +1,30 @@
+﻿生成启动时间为 2015/5/7 13:16:12。
+     1>项目“F:\GitHub\NetProtocol_Routing\NetProtocol\NetProtocol.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         F:\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\NetProtocol.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         F:\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\NetProtocol.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CMyIP.cpp CRouting.cpp MainFrm.cpp NetProtocol.cpp NetProtocolDoc.cpp NetProtocolView.cpp
+         NetProtocolView.cpp
+         NetProtocolDoc.cpp
+         NetProtocol.cpp
+         MainFrm.cpp
+         CRouting.cpp
+         CMyIP.cpp
+         正在生成代码...
+       ResourceCompile:
+         C:\Program Files\Windows Kits\8.1\bin\x86\rc.exe /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /l"0x0804" /IDebug\ /nologo /fo"Debug\NetProtocol.res" NetProtocol.rc 
+       Link:
+         F:\VS2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\GitHub\NetProtocol_Routing\Debug\NetProtocol.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:F:\VS2013\VC\Include\Manifest\dpiaware.manifest /DEBUG /PDB:"F:\GitHub\NetProtocol_Routing\Debug\NetProtocol.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\GitHub\NetProtocol_Routing\Debug\NetProtocol.lib" /MACHINE:X86 Debug\NetProtocol.res
+         Debug\CMyIP.obj
+         Debug\CRouting.obj
+         Debug\MainFrm.obj
+         Debug\NetProtocol.obj
+         Debug\NetProtocolDoc.obj
+         Debug\NetProtocolView.obj
+         Debug\stdafx.obj
+         NetProtocol.vcxproj -> F:\GitHub\NetProtocol_Routing\Debug\NetProtocol.exe
+     1>已完成生成项目“F:\GitHub\NetProtocol_Routing\NetProtocol\NetProtocol.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:11.70
