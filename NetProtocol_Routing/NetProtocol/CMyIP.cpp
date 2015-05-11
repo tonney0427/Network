@@ -71,7 +71,7 @@ BOOL CMyIP::IP2Link(WPARAM wparam, LPARAM lparam)
 	ident++;
 	IP_data = (struct Msg*)wparam;
 	info->sid = IP2Num(sip);
-	info->did = IP2Num(IP_data->dip);
+	info->did = IP2Num(IP_data->ih_daddr);
 	unsigned int dip = Num2IP(Route.LS(info));
 	while (strlen(IP_data->data) - 8 * offset > MAXSIZE)
 	{
@@ -82,6 +82,8 @@ BOOL CMyIP::IP2Link(WPARAM wparam, LPARAM lparam)
 		MyIP->iphdr->ih_ident = ident;
 		MyIP->iphdr->ih_offset = offset;
 		MyIP->iphdr->ih_len = strlen(IP_data->data);
+		MyIP->iphdr->ih_sport = IP_data->ih_sport;
+		MyIP->iphdr->ih_dport = IP_data->ih_dport;
 		offset = offset + MAXSIZE / 8;
 		MyIP->iphdr->ih_version = 4;
 		strncpy_s(MyIP->data, MAXSIZE, IP_data->data, MAXSIZE);
@@ -94,6 +96,8 @@ BOOL CMyIP::IP2Link(WPARAM wparam, LPARAM lparam)
 	MyIP->iphdr->ih_ident = ident;
 	MyIP->iphdr->ih_offset = offset;
 	MyIP->iphdr->ih_len = strlen(IP_data->data);
+	MyIP->iphdr->ih_sport = IP_data->ih_sport;
+	MyIP->iphdr->ih_dport = IP_data->ih_dport;
 	MyIP->iphdr->ih_version = 4;
 	memcpy(MyIP->data, IP_data->data, strlen(IP_data->data) - offset * 8);
 	(AfxGetApp()->m_pMainWnd)->SendMessage(LINKSEND, (WPARAM)MyIP, lparam);
@@ -123,12 +127,12 @@ Bool CMyIP::IP2Trans(WPARAM wparam, LPARAM lparam)
 			if (MyIP->iphdr->ih_flags){
 				memcpy(IP_data->data + _offset, MyIP->data, MAXSIZE);
 				_offset = _offset + MAXSIZE;
-				IP_data->dip = MyIP->iphdr->ih_daddr;
+				IP_data->ih_daddr = MyIP->iphdr->ih_daddr;
 			}
 			else{
 				memcpy(IP_data->data + _offset, MyIP->data, MyIP->iphdr->ih_len - _offset);
 				_offset = 0;
-				IP_data->dip = MyIP->iphdr->ih_daddr;
+				IP_data->ih_daddr = MyIP->iphdr->ih_daddr;
 				(AfxGetApp()->m_pMainWnd)->SendMessage(TRANSTOAPP, (WPARAM)IP_data, lparam);
 			}
 		}
