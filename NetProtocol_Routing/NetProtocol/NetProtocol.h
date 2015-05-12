@@ -51,12 +51,13 @@ struct _iphdr //定义IP首部
 };
 
 struct Msg{                     ///<数据
-	unsigned int ih_saddr;		///< 32位源IP
-	unsigned int ih_daddr;		///< 32位目的IP
 	unsigned int ih_sport;		///< 32位源端口号
 	unsigned int ih_dport;		///< 32位目的端口号
-	char data[1024];
-	unsigned int data_len; 
+	unsigned int sip;			///< 32位源IP
+	unsigned int dip;			///< 32位目的IP
+	int datelen;
+	char data[2048];
+	unsigned int protocol;		///< 上层协议类型
 };
 
 struct IP_Msg{
