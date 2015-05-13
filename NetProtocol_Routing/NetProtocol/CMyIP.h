@@ -27,6 +27,7 @@ public:
 	_data  *info;
 	int _offset;
 	unsigned int sip;
+	
 
 public:
 	CRouting Route;

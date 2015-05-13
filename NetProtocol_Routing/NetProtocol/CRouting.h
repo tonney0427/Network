@@ -20,6 +20,9 @@ class CRouting
 {
 public:
 	_data *FIP;
+	Edge edge[N];
+	int dis[N];
+	int pre[N];
 
 public:
 	/** @brief CRouting类的构造函数 */
@@ -32,5 +35,9 @@ public:
 	void Dijkstra(int n, int v, int *dist, int *pre, int c[maxnum][maxnum]);
 	/** @brief 求解全局路径的最短路径 */
 	BOOL LS(_data *FIP);
+	/** @brief n为节点数，edge为边数，v为初始节点，dist为初始节点到各个节点的距离, pre为前节点序列 */
+	void Bellman_Ford(int n, int edgenum, int v, int *dist, int *pre, Edge edge[N]);
+	/** @brief 求解局部路径的最短路径 */
+	void DV(_data *FIP);
 };
 

@@ -77,6 +77,15 @@ struct _data{
 };
 
 #define IPN	6
+#define MAX 0x3f3f3f3f
+#define N 1010
+
+
+//需要添加一个这样的结构，然后把边的个数和每个边的初始节点u,v,长度cost建立一个Edge结构
+struct Edge{
+	int u, v;
+	int cost;
+};
                         
 class CNetProtocolApp : public CWinApp
 {

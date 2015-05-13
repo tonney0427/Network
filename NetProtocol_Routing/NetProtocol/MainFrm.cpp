@@ -166,23 +166,23 @@ LRESULT CMainFrame::OnIP2Trans(WPARAM wparam, LPARAM lparam) //ÍøÂç²ã½â°ü´«Êäµ½´
 	///< ÈôÊÇÔòÊı¾İ³É¹¦½ÓÊÕ ½øĞĞÉÙÁ¿µÄ¼ìÑéºÍ¼ì²é, ÈôÃ»ÓĞ´íÎó
 	///< Ôò½«IP_msg½á¹¹°şÀë³öMsg½á¹¹
 	IP_Msg *mip = (struct IP_Msg*)wparam;
-	if (!mip->iphdr->ih_protl)
-	{
-		if (!IP.IP2Trans(wparam, lparam))
-			return true;
-		else
-		{
-			printf("ÍøÂç²ã´«Êä¸ø´«Êä²ãÊı¾İ°ü³öÏÖÎÊÌâ.\n");
-			return false;
-		}
-	}
-	else
+	if (mip->iphdr->ih_protl==1)
 	{
 		if (!IP.RecvMsg(wparam, lparam))
 			return true;
 		else
 		{
 			printf("ÍøÂç²ã½ÓÊÕÂ·ÓÉĞÅÏ¢³öÏÖÎÊÌâ.\n");
+			return false;
+		}
+	}
+	else
+	{
+		if (!IP.IP2Trans(wparam, lparam))
+			return true;
+		else
+		{
+			printf("ÍøÂç²ã´«Êä¸ø´«Êä²ãÊı¾İ°ü³öÏÖÎÊÌâ.\n");
 			return false;
 		}
 	}
@@ -208,17 +208,8 @@ LRESULT CMainFrame::OnIP2Link(WPARAM wparam, LPARAM lparam) //ÍøÂç²ã´ò°üÊı¾İ·¢ËÍ
 	///< ·ñÔò return TRUE;
 	IP_Msg *mip = (struct IP_Msg*)wparam;
 	clock_t t1 = clock(),t2;
-	if (!mip->iphdr->ih_protl)
+	if (mip->iphdr->ih_protl==1)
 	{
-		if (!IP.IP2Link(wparam, lparam))
-			return true;
-		else
-		{
-			printf("ÍøÂç²ã´«Êä¸øÁ´Â·Êı¾İ°ü³öÏÖÎÊÌâ.\n");
-			return false;
-		}
-	}
-	else{
 		if (!IP.SendMsg(wparam, lparam))
 			return true;
 		else
@@ -227,7 +218,16 @@ LRESULT CMainFrame::OnIP2Link(WPARAM wparam, LPARAM lparam) //ÍøÂç²ã´ò°üÊı¾İ·¢ËÍ
 			return false;
 		}
 	}
-	if (t1 - t2 == 15)
+	else{
+		if (!IP.IP2Link(wparam, lparam))
+			return true;
+		else
+		{
+			printf("ÍøÂç²ã´«Êä¸øÁ´Â·Êı¾İ°ü³öÏÖÎÊÌâ.\n");
+			return false;
+		}
+	}
+	if (t1 - t2 == 30)
 	{
 		if (!IP.SendMsg(wparam, lparam))
 			return true;

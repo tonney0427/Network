@@ -109,6 +109,22 @@ void CRouting::Dijkstra(int n, int v, int *dist, int *pre, int c[maxnum][maxnum]
 
 BOOL CRouting::LS(_data *FIP)
 {											          
-	Dijkstra(FIP->sid, FIP->did, FIP->dist, FIP->pre, FIP->c);
+	Dijkstra(IPN-1, FIP->did, FIP->dist, FIP->pre, FIP->c);
 	return searchPath(FIP->pre, FIP->sid, FIP->did);
+}
+
+//n为节点数，edge为边数，v为初始节点，dist为初始节点到各个节点的距离, pre为前节点序列
+void CRouting::Bellman_Ford(int n, int edgenum, int v, int *dist, int *pre, Edge edge[N])
+{
+	pre[v] = v;
+	for (int i = 1; i <= n; ++i) //初始化
+		dis[i] = (i == v ? 0 : MAX);
+
+	for (int i = 1; i <= n - 1; ++i)
+	for (int j = 1; j <= edgenum; ++j)
+	if (dis[edge[j].v] > dis[edge[j].u] + edge[j].cost) //松弛（顺序一定不能反~）
+	{
+		dis[edge[j].v] = dis[edge[j].u] + edge[j].cost;
+		pre[edge[j].v] = edge[j].u;
+	}
 }
